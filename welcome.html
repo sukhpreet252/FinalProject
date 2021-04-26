@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="site.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+</head>
+<body>
+    <form>
+        <div class="container">
+            <h1 id="welcome"></h1><hr>
+            <h2>Update Information</h2>
+        <label>First Name</label>
+        <input type="text" id="txtFName" name="ftName" placeholder="Enter your first name" required><br>
+
+       <label>Last Name</label>
+       <input type="text" id="txtLName" name="lName" placeholder="Enter your last name" required><br>
+
+        <label>Email</label>
+        <input type="text" id="txtEmail" name="email" placeholder="Email" required><br>
+
+        <button type="button" id="btnRegister" class="registerbtn">Update</button>
+        </div>
+    </form>
+	<script type="text/javascript">
+		$(document).ready(function(){
+            var urlParams = new URLSearchParams(window.location.search);
+            var fname = urlParams.get('fname');
+            var lname = urlParams.get('lname');
+            var email = urlParams.get('Email');
+            $('#welcome').text("Welcome "+fname);
+            $('#txtFName').val(fname);
+            $('#txtLName').val(lname);
+            $('#txtEmail').val(email);
+
+             $("#btnRegister").click(function(){
+                var fName= $("#txtFName").val();
+                var lName= $("#txtLName").val();
+                var email= $("#txtEmail").val();
+
+                if(fName=="" || lName=="" || email=="")
+                {
+                    alert("All the fields values are required. Please check your values.");
+                }
+                else
+                {
+                    var path = "http://localhost:3000/updateuser";
+
+                    $.post(path,
+                    {
+                        name: fName,
+                        namel: lName,
+                        mail:email
+                    },
+                    function(data, status){
+                        if(status=="success")
+                        {
+                            alert("Updated Successfully");
+                        }
+                        else
+                        {
+                            alert("Please enter valid values");
+                        }
+                    });
+                }
+            });	 
+		});
+	</script>
+</body>
+</html>
