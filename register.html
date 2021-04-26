@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register User</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous"> 
+        <link rel="stylesheet" href="site.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <form>
+            <div class="container">
+                <h1>Register</h1>
+            <label>First Name</label>
+            <input type="text" id="txtFName" name="ftName" placeholder="Enter your first name" required><br>
+
+           <label>Last Name</label>
+           <input type="text" id="txtLName" name="lName" placeholder="Enter your last name" required><br>
+            
+           <label>Age</label>
+           <input type="text" id="txtage" name="age" placeholder="Enter your age" required><br>
+
+           <label>Phone Number</label>
+           <input type="text" id="txtphone" name="phone" placeholder="Enter your phone" required><br>
+
+            <label>Email</label>
+            <input type="text" id="txtEmail" name="email" placeholder="Email" required><br>
+
+            <label>Password</label>
+            <input type="password" id="txtPassword" name="password" placeholder="Password" required><br>
+
+            <button type="button" id="btnRegister" class="registerbtn">Register</button>
+
+            <div class="container signin">
+                <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+              </div>
+            </div>
+        </form>
+    </body>
+    <script type="text/javascript">
+		$(document).ready(function(){
+            $("#btnRegister").click(function(){
+                var fName= $("#txtFName").val();
+                var lName= $("#txtLName").val();
+                var age= $("#txtage").val();
+                var phone= $("#txtphone").val();
+                var email= $("#txtEmail").val();
+                var pass= $("#txtPassword").val();
+
+                if(fName=="" || lName=="" || age=="" || phone=="" || email=="" || pass=="")
+                {
+                    alert("All the fields values are required. Please check your values.");
+                }
+                else
+                {
+                    var path = "http://localhost:3000/registeruser";
+
+                    $.post(path,
+                    {
+                        name: fName,
+                        namel: lName,
+                        age1: age,
+                        phone1: phone,
+                        mail:email,
+                        password:pass
+                    },
+                    function(data, status){
+                        if(status=="success")
+                        {
+                            window.location.href="login.html";
+                        }
+                        else
+                        {
+                            alert("Please enter valid values");
+                        }
+                    });
+                }
+            });
+
+		});
+	</script>
+</html>
